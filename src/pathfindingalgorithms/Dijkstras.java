@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Dijkstras 
 {
 	static ReadCaverns rc = new ReadCaverns();
-
+	
 	public static void main(String[] args) throws IOException 
 	{
 		System.out.println("Please enter absolute filepath to .cav file:");
@@ -124,7 +124,7 @@ public class Dijkstras
 		
 		if (openList.size() == 0 && goal.no != current.no)
 		{
-			throw new RuntimeException("No path found!");
+			System.out.println("No path found!");
 		}
 		
 		if (current.no == goal.no)
