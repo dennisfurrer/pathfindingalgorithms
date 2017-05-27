@@ -49,8 +49,6 @@ public class Dijkstras
 		List<Cavern> closedList = new ArrayList<Cavern>();
 		List<Cavern> solutionList = new ArrayList<Cavern>();
 		List<Cavern> finalPath = new ArrayList<Cavern>();
-
-		System.out.print("There are " + noOfCavs + " caverns.\n");
 		
 		Cavern current = root;
 		root.value = 0;
