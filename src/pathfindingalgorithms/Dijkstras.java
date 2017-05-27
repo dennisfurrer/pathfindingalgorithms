@@ -12,6 +12,7 @@ public class Dijkstras
 
 	public static void main(String[] args) throws IOException 
 	{
+		System.out.println("Please enter absolute filepath to .cav file:");
 		Scanner sc = new Scanner(System.in);
 		String in = sc.nextLine();
 		rc.setInput(in);
@@ -49,7 +50,7 @@ public class Dijkstras
 		List<Cavern> solutionList = new ArrayList<Cavern>();
 		List<Cavern> finalPath = new ArrayList<Cavern>();
 
-		System.out.print("There are " + noOfCavs + " caverns.\nThe root cavern has coordinates (" + root.x + ", " + root.y + ").\n");
+		System.out.print("There are " + noOfCavs + " caverns.\n");
 		
 		Cavern current = root;
 		root.value = 0;
@@ -153,6 +154,6 @@ public class Dijkstras
 			}
 		}
 		
-		System.out.print("The path cost is " + goal.value);
+		System.out.print("Path cost: " + goal.value);
 	}
 }
