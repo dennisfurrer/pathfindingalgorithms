@@ -19,9 +19,9 @@ public class CavFileGenerator
 		int noOfCavs = noOfCavs();
 		int[][] coordinates = coordinates();
 		boolean[][] connectivity = connectivity();
-		boolean pathFound = pathTest(noOfCavs, coordinates, connectivity);
+		int[] pathFound = pathTest(noOfCavs, coordinates, connectivity);
 		
-		while (pathFound == false)
+		while (pathFound[0] == 0 || pathFound[1] < 6)
 		{
 			noOfCavs = noOfCavs();
 			coordinates = coordinates();
@@ -105,15 +105,17 @@ public class CavFileGenerator
 		return connectivity;
 	}
 	
-	public static boolean pathTest(int noOfCavs, int[][] xyArray, boolean[][] connMatrix)
+	public static int[] pathTest(int noOfCavs, int[][] xyArray, boolean[][] connMatrix)
 	{
-		boolean pathFound = false;
+		int[] pathFound = new int[2];
+		pathFound[0] = 0;
 		
 		Cavern root = new Cavern(xyArray[0][0], xyArray[0][1], 0);
 		Cavern goal = new Cavern(xyArray[noOfCavs - 1][0], xyArray[noOfCavs - 1][1], noOfCavs-1);
 		List<Cavern> openList = new ArrayList<Cavern>();
 		List<Cavern> closedList = new ArrayList<Cavern>();
 		List<Cavern> solutionList = new ArrayList<Cavern>();
+		List<Cavern> finalPath = new ArrayList<Cavern>();
 		
 		Cavern current = root;
 		root.value = 0;
@@ -185,14 +187,19 @@ public class CavFileGenerator
 			}
 		}
 		
-		//pathFound = ((openList.size() == 0 && goal.no != current.no) ? false : true);
-		//pathFound = current.no == goal.no ? true : false;
-		
 		if (current.no == goal.no)
 		{
 			goal.value = current.value;
-			pathFound = true;
+			pathFound[0] = 1;
 		}
+		
+		while (solutionList.contains(current))
+		{
+			finalPath.add(current);
+			current = current.parent;
+		}
+		
+		pathFound[1] = finalPath.size();
 		
 		return pathFound;
 	}
